@@ -52,8 +52,9 @@ public class AdminSQLite extends SQLiteOpenHelper {
                 "idPrestamo         INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "idBiblioteca       INTEGER," +
                 "idUsuario          INTEGER," +
-                "idLibro          INTEGER," +
+                "idLibro            INTEGER," +
                 "fechaInicio        TEXT," +
+                "activo             INTEGER," +
                 "fechaFin           TEXT)");
 
 

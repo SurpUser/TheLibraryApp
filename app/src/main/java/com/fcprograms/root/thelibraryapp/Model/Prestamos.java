@@ -18,6 +18,7 @@ public class Prestamos {
     private int idLibro;
     private String fechaInicio;
     private String fechaFin;
+    private int activo;
 
     private static AdminSQLite db;
     private SQLiteDatabase bdsql;
@@ -37,6 +38,7 @@ public class Prestamos {
         setIdLibro(0);
         setFechaFin("");
         setFechaInicio("");
+        setActivo(0);
     }
     public int getIdLibro() {
         return idLibro;
@@ -45,6 +47,10 @@ public class Prestamos {
     public void setIdLibro(int idLibro) {
         this.idLibro = idLibro;
     }
+
+    public void setActivo(int activo){this.activo = activo;}
+
+    public int getActivo(){return this.activo;}
 
     public int getIdPrestamo() {
         return idPrestamo;
@@ -95,6 +101,7 @@ public class Prestamos {
             values.put("idLibro",getIdLibro());
             values.put("fechaInicio", getFechaInicio());
             values.put("fechaFin",getFechaFin());
+            values.put("activo",getActivo());
             (db.getWritableDatabase()).insert("prestamo", null, values);
             db.close();
             return true;
@@ -103,12 +110,12 @@ public class Prestamos {
         }
     }
 
-    public Boolean eliminar(Context context, int id){
+    public Boolean update(Context context, int id){
         try {
             db = new AdminSQLite(context);
             Cursor cursor;
             bdsql = db.getReadableDatabase();
-            cursor = bdsql.rawQuery("delete from prestamo where idPrestamo = '"+id+"';", null);
+            cursor = bdsql.rawQuery("update prestamo set activo = '1' where idPrestamo = '"+id+"';", null);
             if (cursor.moveToFirst()) {
                 return false;
             } else{
@@ -127,7 +134,7 @@ public class Prestamos {
         try {
             db = new AdminSQLite(c);
             SQLiteDatabase sqldb = db.getWritableDatabase();
-            cursor = sqldb.rawQuery("select idPrestamo,idBiblioteca,idUsuario,ididLibro,fechaInicio,fechaFin from prestamo where idPrestamo = '"+idPrestamo+"';", null);
+            cursor = sqldb.rawQuery("select idPrestamo,idBiblioteca,idUsuario,ididLibro,fechaInicio,fechaFin,activo from prestamo where idPrestamo = '"+idPrestamo+"';", null);
             if(cursor.moveToFirst()){
                 setIdPrestamo(cursor.getInt(0));
                 setIdBiblioteca(cursor.getInt(1));

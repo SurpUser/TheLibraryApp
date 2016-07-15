@@ -1,8 +1,10 @@
 package com.fcprograms.root.thelibraryapp.Activity;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
@@ -47,12 +49,8 @@ public class cPrestamosLibros extends AppCompatActivity  implements AdapterView.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void finalizarPrestamos(String fecha){
-       //if (prestamos.buscar(this,id)){
-           restarFecha(fecha);
-      // }else{
-       //    Toast.makeText(cPrestamosLibros.this, "Error al Finalizar Prestamo", Toast.LENGTH_SHORT).show();
-       //}
+    private void finalizarPrestamos(String fecha, int idPrestamo){
+           restarFecha(fecha,idPrestamo);
     }
 
     private void init(){
@@ -63,7 +61,7 @@ public class cPrestamosLibros extends AppCompatActivity  implements AdapterView.
         toolbar = (Toolbar)findViewById(R.id.cprestamos_toolbar);
         FechaIniico = (TextView)findViewById(R.id.FechaIniicoPresmotextView);
     }
-    public void restarFecha(String fecha){
+    public void restarFecha(String fecha,int idPrestamo){
         String fechaInicio = fecha;
         String fechaActual;
         String subFecha;
@@ -79,7 +77,7 @@ public class cPrestamosLibros extends AppCompatActivity  implements AdapterView.
         int mesInicio = Integer.valueOf(aFechaIng[1]);
         int anioInicio = Integer.valueOf(aFechaIng[2]);
 
-        DateFormat df1 = new SimpleDateFormat("HH:mm:ss");
+        DateFormat df1 = new SimpleDateFormat("hh:mm:ss");
         horaActual = df1.format(date);
         String[] horaA  = horaActual.split(":");
         int horasActual = Integer.valueOf(horaA[0]);
@@ -98,11 +96,11 @@ public class cPrestamosLibros extends AppCompatActivity  implements AdapterView.
         int mesActual = Integer.valueOf(aFecha[1]);
         int anioActual = Integer.valueOf(aFecha[2]);
 
-        horas = horasActual -(horasActual - horasInicio);
+        horas = horasActual - horasInicio;
         if(horas < 0 )
             horas *= -1;
 
-        minutos = minutosActual - ( minutosActual - minutosInicio);
+        minutos =  minutosActual - minutosInicio;
         if(minutos < 0 )
             minutos *= -1;
 
@@ -164,14 +162,34 @@ public class cPrestamosLibros extends AppCompatActivity  implements AdapterView.
             }
         //}
         dias -=30;
-        Toast.makeText(cPrestamosLibros.this, dias+"/"+meses+"/"+anios+ " "+horas+":"+minutos, Toast.LENGTH_SHORT).show();
+        createSimpleDialog(dias+"/"+meses+"/"+anios+ " "+horas+":"+minutos,idPrestamo).show();
 }
 
+
+    public AlertDialog createSimpleDialog(String mensaje, final int idPrestamo) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Entregar Libro")
+                .setMessage(mensaje)
+                .setPositiveButton("Aceptar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (prestamos.update(cPrestamosLibros.this,idPrestamo)){
+                                    Toast.makeText(cPrestamosLibros.this, "Puedes pedir otro libro cuando quieras", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(cPrestamosLibros.this, "Error al Entregar el Libro", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+        return builder.create();
+    }
 
     private void rellenarArrayList() {
         db = new AdminSQLite(this);
         SQLiteDatabase bd = db.getReadableDatabase();
-        cursor = bd.rawQuery("select idPrestamo,idLibro,fechaInicio,fechaFin from prestamo;", null);
+        cursor = bd.rawQuery("select idPrestamo,idLibro,fechaInicio,fechaFin from prestamo where activo = '0';", null);
         if (cursor.moveToFirst()) {
             do{
                 arrayPrestamos.add(new Prestamos(cursor.getInt(0),cursor.getInt(1),cursor.getString(2),cursor.getString(3)));
@@ -205,10 +223,9 @@ public class cPrestamosLibros extends AppCompatActivity  implements AdapterView.
 
         switch (item.getItemId()) {
             case R.id.finalizarPrestamo:
-                finalizarPrestamos(((Prestamos)arrayPrestamos.get(info.position)).getFechaInicio());
+                finalizarPrestamos(((Prestamos)arrayPrestamos.get(info.position)).getFechaInicio(),((Prestamos)arrayPrestamos.get(info.position)).getIdPrestamo());
                 return true;
             case R.id.cancelar:
-                restarFecha("13/07/2016");
                 return true;
             default:
                 return super.onContextItemSelected(item);

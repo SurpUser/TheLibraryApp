@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +13,7 @@ import com.fcprograms.root.thelibraryapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Root on 05-Jun-16.
@@ -21,7 +21,7 @@ import java.util.List;
 public class LibrosAdapter extends ArrayAdapter {
     private Context context;
     private ArrayList<Libros> datos;
-    private Filtro filtro;
+    private List<Libros> libro;
 
     public LibrosAdapter(Context context, ArrayList<Libros> datos) {
         super(context, R.layout.row, datos);
@@ -46,48 +46,28 @@ public class LibrosAdapter extends ArrayAdapter {
         return item;
     }
 
-    public ArrayList<Libros> getLibro(){return datos;}
-    public void setLibro(ArrayList<Libros> dato){this.datos = dato;}
+    public void filter(String charText) {
 
-    @Override
-    public Filter getFilter() {
+        charText = charText.toLowerCase(Locale.getDefault());
 
-        if(filtro == null){
-            filtro = new Filtro();
-        }
-        return filtro;
-    }
+        libro.clear();
+        if (charText.length() == 0) {
+            libro.addAll(datos);
 
-    private class Filtro extends Filter{
-
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            FilterResults results = new FilterResults();
-            if(constraint == null || constraint.length() == 0){
-                results.values = getLibro();
-                results.count = getLibro().size();
-            }else {
-                List<Libros> libroList = new ArrayList<>();
-
-                for(Libros l: getLibro()){
-                    if(l.getTitulo().toUpperCase().startsWith(libroList.toString().toUpperCase()))
-                        libroList.add(l);
-                    results.values = libroList;
-                    results.count = libroList.size();
+        } else {
+            for (Libros l : datos) {
+                if (charText.length() != 0 && l.getTitulo().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    libro.add(l);
+                } else if (charText.length() != 0 && l.getTitulo().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    libro.add(l);
                 }
             }
-            return results;
         }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            if(results.count == 0){
-                notifyDataSetInvalidated();
-            }else {
-                setLibro((ArrayList<Libros>)results.values);
-                notifyDataSetChanged();
-
-            }
-        }
+        notifyDataSetChanged();
     }
+
+
+
+
 }
+

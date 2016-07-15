@@ -136,13 +136,17 @@ public class cLibrosActivity extends AppCompatActivity  implements AdapterView.O
         toolbar = (Toolbar)findViewById(R.id.clibros_toolbar);
     }
 
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
+        MenuItem item = menu.findItem(R.id.action_search);
 
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = new SearchView((this).getSupportActionBar().getThemedContext());
+        SearchView searchView = new SearchView(((cLibrosActivity) this).getSupportActionBar().getThemedContext());
+
+        MenuItemCompat.setShowAsAction(item,MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+        MenuItemCompat.setActionView(item, searchView);
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -158,11 +162,43 @@ public class cLibrosActivity extends AppCompatActivity  implements AdapterView.O
             }
         });
 
-        // Define the listener
-        MenuItemCompat.OnActionExpandListener expandListener = new MenuItemCompat.OnActionExpandListener() {
+        return true;
+    }*/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_search, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        //*** setOnQueryTextFocusChangeListener ***
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String searchQuery) {
+                adapter.filter(searchQuery.toString().trim());
+                lista.invalidate();
+                return true;
+            }
+        });
+
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                // Do something when action item collapses
+                // Do something when collapsed
                 return true;  // Return true to collapse action view
             }
 
@@ -171,14 +207,7 @@ public class cLibrosActivity extends AppCompatActivity  implements AdapterView.O
                 // Do something when expanded
                 return true;  // Return true to expand action view
             }
-        };
-
-        // Get the MenuItem for the action item
-        MenuItem actionMenuItem = menu.findItem(R.id.action_search);
-
-        // Assign the listener to that action item
-        MenuItemCompat.setOnActionExpandListener(actionMenuItem, expandListener);
-
+        });
         return true;
     }
 }
