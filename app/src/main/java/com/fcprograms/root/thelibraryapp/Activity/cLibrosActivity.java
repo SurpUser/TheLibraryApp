@@ -58,6 +58,7 @@ public class cLibrosActivity extends AppCompatActivity  implements AdapterView.O
             } while(cursor.moveToNext());
         } else
             Toast.makeText(this, "No hay Libros Registrados", Toast.LENGTH_SHORT).show();
+        adapter = new LibrosAdapter(arrayLibros,this);
         lista.setAdapter(adapter);
         bd.close();
     }
@@ -131,39 +132,9 @@ public class cLibrosActivity extends AppCompatActivity  implements AdapterView.O
     private void init(){
         arrayLibros = new ArrayList();
         libros = new Libros();
-        adapter = new LibrosAdapter(this, arrayLibros);
         lista = (ListView)findViewById(R.id.LibroslistView);
         toolbar = (Toolbar)findViewById(R.id.clibros_toolbar);
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search, menu);
-        MenuItem item = menu.findItem(R.id.action_search);
-
-        SearchView searchView = new SearchView(((cLibrosActivity) this).getSupportActionBar().getThemedContext());
-
-        MenuItemCompat.setShowAsAction(item,MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
-        MenuItemCompat.setActionView(item, searchView);
-
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.setLibro(arrayLibros);
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-
-        return true;
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -209,5 +180,20 @@ public class cLibrosActivity extends AppCompatActivity  implements AdapterView.O
             }
         });
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_search) {
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -42,5 +42,5 @@
     <string name="fechafin">Fecha fin</string>
     <string name="finalizarPrestamoText">Entergar Libro</string>
     <string name="cancelarText">Cancelar</string>
-    <string name="acercadeText"></string>
+    <string name="acercadeText">Acerca De</string>
 </resources>

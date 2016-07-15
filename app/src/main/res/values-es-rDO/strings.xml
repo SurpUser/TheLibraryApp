@@ -30,6 +30,7 @@
     <string name="confirmarContraseñaText">Confirmar contraseña</string>
     <string name="agregarLibrosText">Agregar libros</string>
     <string name="buscarLibrosText">Buscar libros</string>
+    <string name="buscarPrestamoText">Buscar Prestamos</string>
     <string name="registrosText">Registros</string>
     <string name="consultasText">Consultas</string>
     <string name="comunicarText">Comunicar</string>
@@ -37,7 +38,9 @@
     <string name="configuracionText">Configuración</string>
     <string name="cerrarSesionText">Cerrar sesion</string>
     <string name="ajustesText">Ajustes</string>
-    <string name="cantidadText">Cantidad</string>
     <string name="fechainicio">Fecha inicio</string>
     <string name="fechafin">Fecha fin</string>
+    <string name="finalizarPrestamoText">Entergar Libro</string>
+    <string name="cancelarText">Cancelar</string>
+    <string name="acercadeText">Acerca De</string>
 </resources>

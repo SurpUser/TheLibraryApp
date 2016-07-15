@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,56 +18,83 @@ import java.util.Locale;
 /**
  * Created by Root on 05-Jun-16.
  */
-public class LibrosAdapter extends ArrayAdapter {
-    private Context context;
-    private ArrayList<Libros> datos;
-    private List<Libros> libro;
+public class LibrosAdapter extends BaseAdapter {
 
-    public LibrosAdapter(Context context, ArrayList<Libros> datos) {
-        super(context, R.layout.row, datos);
+    public class ViewHolder {
+        ImageView imagen;
+        TextView txtTitulo, txtAutor;
+    }
+
+    public List<Libros> parkingList;
+
+    public Context context;
+    ArrayList<Libros> arraylist;
+
+    public LibrosAdapter(List<Libros> apps, Context context) {
+        this.parkingList = apps;
         this.context = context;
-        this.datos = datos;
+        arraylist = new ArrayList<Libros>();
+        arraylist.addAll(parkingList);
+
+    }
+
+    @Override
+    public int getCount() {
+        return parkingList.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View item = inflater.inflate(R.layout.row, null);
+        View rowView = convertView;
+        ViewHolder viewHolder;
 
-        ImageView imagen = (ImageView) item.findViewById(R.id.imageView_Libro);
-        imagen.setImageResource(((Libros)datos.get(position)).getIdImagen());
+        if (rowView == null) {
+            LayoutInflater inflater = LayoutInflater.from(context);
+            rowView = inflater.inflate(R.layout.row, null);
+            // configure view holder
+            viewHolder = new ViewHolder();
+            viewHolder.imagen = (ImageView)rowView.findViewById(R.id.imageView_Libro);
+            viewHolder.txtTitulo = (TextView)rowView.findViewById(R.id.textView_superior);
+            viewHolder.txtAutor = (TextView)rowView.findViewById(R.id.textView_inferior);
+            rowView.setTag(viewHolder);
 
-        TextView nombre = (TextView) item.findViewById(R.id.textView_superior);
-        nombre.setText(((Libros)datos.get(position)).getTitulo());
-
-        TextView autor = (TextView) item.findViewById(R.id.textView_inferior);
-        autor.setText(((Libros)datos.get(position)).getAutor());//String.valueOf(position)
-
-        return item;
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        viewHolder.imagen.setImageResource(R.drawable.default_book);
+        viewHolder.txtTitulo.setText(parkingList.get(position).getTitulo() + "");
+        viewHolder.txtAutor.setText(parkingList.get(position).getAutor() + "");
+        return rowView;
     }
 
     public void filter(String charText) {
 
         charText = charText.toLowerCase(Locale.getDefault());
 
-        libro.clear();
+        parkingList.clear();
         if (charText.length() == 0) {
-            libro.addAll(datos);
+            parkingList.addAll(arraylist);
 
         } else {
-            for (Libros l : datos) {
-                if (charText.length() != 0 && l.getTitulo().toLowerCase(Locale.getDefault()).contains(charText)) {
-                    libro.add(l);
-                } else if (charText.length() != 0 && l.getTitulo().toLowerCase(Locale.getDefault()).contains(charText)) {
-                    libro.add(l);
+            for (Libros postDetail : arraylist) {
+                if (charText.length() != 0 && postDetail.getTitulo().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    parkingList.add(postDetail);
+                } else if (charText.length() != 0 && postDetail.getAutor().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    parkingList.add(postDetail);
                 }
             }
         }
         notifyDataSetChanged();
     }
-
-
-
-
 }
 
