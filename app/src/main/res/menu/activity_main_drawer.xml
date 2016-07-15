@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_perfilUsuario"
+            android:icon="@drawable/ic_local_see_black"
+            android:title="@string/perfilText"
+            />
+    </group>
+    <item android:title="@string/registrosText">
+        <menu>
+            <item
+                android:id="@+id/nav_AgregarLibros"
+                android:icon="@drawable/ic_library_add"
+                android:title="@string/agregarLibrosText" />
+        </menu>
+    </item>
+    <item android:title="@string/consultasText">
+        <menu>
+            <item
+                android:id="@+id/nav_ConsultarLibros"
+                android:icon="@drawable/ic_library_books"
+                android:title="@string/buscarLibrosText" />
+            <item
+                android:id="@+id/nav_ConsultarPrestamos"
+                android:icon="@drawable/ic_library_books"
+                android:title="@string/buscarPrestamoText" />
+        </menu>
+    </item>
+
+    <item android:title="@string/comunicarText">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/compartirText" />
+            <item
+                android:id="@+id/nav_configuracion"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/configuracionText" />
+            <item
+                android:id="@+id/nav_cerrarsesion"
+                android:icon="@drawable/ic_exit_to_app_black"
+                android:title="@string/cerrarSesionText" />
+        </menu>
+    </item>
+
+</menu>

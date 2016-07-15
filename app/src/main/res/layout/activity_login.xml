@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.LoginActivity"
+    android:orientation="vertical">
+
+
+
+
+    <ImageView
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:id="@+id/imageView2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/letras_juntaspng"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/left_margin" />
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/Email_LoginEditText"
+            android:hint="@string/correoText"
+            android:layout_below="@+id/imageView2"
+            android:layout_alignLeft="@+id/button"
+            android:layout_alignStart="@+id/button"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/margin_margin"
+            android:layout_marginRight="@dimen/margin_margin"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+        
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/PasswordLogineditText"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/Email_LoginEditText"
+            android:layout_alignStart="@+id/Email_LoginEditText"
+            android:hint="@string/contraseñaText"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/margin_margin"
+            android:layout_marginRight="@dimen/margin_margin"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text="@string/loginText"
+        android:id="@+id/button"
+        android:background="@color/primary"
+        android:textColor="#FFFF"
+
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:onClick="iniciarSesion"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_margin"
+        android:layout_marginLeft="@dimen/margin_margin"
+        android:layout_marginRight="@dimen/margin_margin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/olvidoSuContraseñaText"
+        android:id="@+id/ForgotYourPasswordTextView"
+        android:textSize="17dp"
+        android:layout_below="@+id/button"
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button"
+        android:layout_gravity="right"
+        android:gravity="left"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/margin_margin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/todaviaNoTieneCuentaCreaUnaText"
+        android:id="@+id/NoAccountTextView"
+        android:layout_below="@+id/ForgotYourPasswordTextView"
+        android:layout_centerHorizontal="true"
+        android:textSize="17dp"
+        android:onClick="registrarContacto"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/left_margin" />
+</LinearLayout>

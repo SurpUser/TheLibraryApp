@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hola_mundo">Hello world</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="app_name">LibraryApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_perfil_usuario">PerfilUsuarioActivity</string>
+    <string name="ayudaText">Esto es un Texto</string>
+    <string name="perfilText">Perfil</string>
+    <string name="correoText">Correo</string>
+    <string name="contraseñaText">Contraseña</string>
+    <string name="loginText">Iniciar sesion</string>
+    <string name="olvidoSuContraseñaText">Olvido su contraseña?</string>
+    <string name="todaviaNoTieneCuentaCreaUnaText">Todavia no tiene cuenta? Crea una</string>
+    <string name="nombreText">Nombre</string>
+    <string name="apellidoText">Apellido</string>
+    <string name="nombreUsuarioText">Nombre Usuario</string>
+    <string name="direcionText"> Direccion</string>
+    <string name="telefonoText">Telefono</string>
+    <string name="tituloText"> Titulo</string>
+    <string name="añoText">Año</string>
+    <string name="isbnText">ISBN</string>
+    <string name="areaText">Area</string>
+    <string name="autorText">Autor</string>
+    <string name="editoraText">Editora</string>
+    <string name="nombresText">Nombres</string>
+    <string name="apellidosText">Apellidos</string>
+    <string name="confirmarContraseñaText">Confirmar contraseña</string>
+    <string name="agregarLibrosText">Agregar libros</string>
+    <string name="buscarLibrosText">Buscar libros</string>
+    <string name="buscarPrestamoText">Buscar Prestamos</string>
+    <string name="registrosText">Registros</string>
+    <string name="consultasText">Consultas</string>
+    <string name="comunicarText">Comunicar</string>
+    <string name="compartirText">Compartir</string>
+    <string name="configuracionText">Configuración</string>
+    <string name="cerrarSesionText">Cerrar sesion</string>
+    <string name="ajustesText">Ajustes</string>
+    <string name="fechainicio">Fecha inicio</string>
+    <string name="fechafin">Fecha fin</string>
+    <string name="finalizarPrestamoText">Entergar Libro</string>
+    <string name="cancelarText">Cancelar</string>
+    <string name="acercadeText"></string>
+</resources>

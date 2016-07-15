@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:id="@+id/card_view"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_margin="15dp"
+    android:background="#FFF"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activity.PrestamosActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/spinnerview">
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/cantidadview">
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:hint="@string/tituloText"
+                android:layout_gravity="center"
+                android:id="@+id/TituloLibroPrestamoeditText"
+                android:maxLength="40"
+                android:inputType="textCapWords" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/fechainicioview">
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:hint="@string/fechainicio"
+                android:layout_gravity="center"
+                android:id="@+id/FechaInicioPrestamoeditText"
+                android:inputType="date|time" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center"
+            android:id="@+id/fechafinview">
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:hint="@string/fechafin"
+                android:id="@+id/FechaFinPrestamoeditText"
+                android:inputType="date|datetime"
+                android:clickable="false"
+                android:contextClickable="false" />
+        </android.support.design.widget.TextInputLayout>
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

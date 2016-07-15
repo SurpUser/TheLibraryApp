@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fcprograms.root.thelibraryapp.Activity.Biblioteca_Activity">
+
+    <include
+        android:id="@+id/biblioteca_toolbar"
+        layout="@layout/tool_bar"/>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activity.Biblioteca_Activity"
+        android:id="@+id/scrollView"
+        android:fillViewport="false"
+        android:layout_below="@+id/biblioteca_toolbar">
+
+
+        <include
+            android:layout_marginBottom="70dp"
+            layout="@layout/edittext_bibliotecas"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="15dp"/>
+
+
+        </ScrollView>
+
+</RelativeLayout>
