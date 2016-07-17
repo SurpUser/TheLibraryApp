@@ -101,8 +101,8 @@ public class Bibliotecas {
             db = new AdminSQLite(context);
             Cursor cursor;
             bdsql = db.getReadableDatabase();
-            cursor = bdsql.rawQuery("update bibliotecas set idUsuario = '"+getIdUsuario()+"', nombre = '"+getNombre()+"',direccion = '"+getDireccion()+"',"+
-                    "telefono = '"+getTelefono()+"',correo = '"+getCorreo()+"' where idBiblioteca = '"+id+"';", null);
+            cursor = bdsql.rawQuery("update bibliotecas set nombre = '"+getNombre()+"',direccion = '"+getDireccion()+"',"+
+                    "telefono = '"+getTelefono()+"',correo = '"+getCorreo()+"' where idUsuario = '"+id+"';", null);
             if (cursor.moveToFirst()) {
                 return false;
             } else{
@@ -140,13 +140,12 @@ public class Bibliotecas {
             db = new AdminSQLite(context);
             Cursor cursor;
             bdsql = db.getReadableDatabase();
-            cursor = bdsql.rawQuery("select idUsuario,nombre,direccion,telefono,correo from bibliotecas where idBiblioteca = '"+id+"';", null);
+            cursor = bdsql.rawQuery("select nombre,direccion,telefono,correo from bibliotecas where idUsuario = '"+id+"';", null);
             if (cursor.moveToFirst()) {
-                setIdUsuario(cursor.getInt(0));
-                setNombre(cursor.getString(1));
-                setDireccion(cursor.getString(2));
-                setTelefono(cursor.getString(3));
-                setCorreo(cursor.getString(4));
+                setNombre(cursor.getString(0));
+                setDireccion(cursor.getString(1));
+                setTelefono(cursor.getString(2));
+                setCorreo(cursor.getString(3));
                 return true;
             } else{
                 return false;

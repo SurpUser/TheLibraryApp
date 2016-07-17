@@ -13,6 +13,7 @@ import com.fcprograms.root.thelibraryapp.DAL.AdminSQLite;
  */
 public class Usuarios {
     private int idUsuario;
+    private String imagen;
     private String nombres;
     private String apellidos;
     private String nombreUsuario;
@@ -35,6 +36,7 @@ public class Usuarios {
         this.tipoUsuario=0;
         this.telefono="";
         this.direccion="";
+        this.imagen="";
     }
 
     public Usuarios(int idUsuario, String nombres, String apellidos, String nombreUsuario, String contrasena, String correo, int tipoUsuario, String telefono, String direccion) {
@@ -62,6 +64,7 @@ public class Usuarios {
             values.put("tipoUsuario", getTipoUsuario());
             values.put("telefono", getTelefono());
             values.put("direccion", getDireccion());
+            values.put("imagen",getImagen());
             (db.getWritableDatabase()).insert("usuarios", null, values);
             db.close();
             return true;
@@ -94,7 +97,7 @@ public class Usuarios {
         try {
             db = new AdminSQLite(c);
             SQLiteDatabase sqldb = db.getWritableDatabase();
-            cursor = sqldb.rawQuery("select nombres,apellidos,correo,nombreUsuario,tipoUsuario,telefono,direccion from usuarios where correo = '"+correo+"';", null);
+            cursor = sqldb.rawQuery("select nombres,apellidos,correo,nombreUsuario,tipoUsuario,telefono,direccion,imagen,idUsuario from usuarios where correo = '"+correo+"';", null);
             if(cursor.moveToFirst()){
                 setNombres(cursor.getString(0));
                 setApellidos(cursor.getString(1));
@@ -103,6 +106,8 @@ public class Usuarios {
                 setTipoUsuario(cursor.getInt(4));
                 setTelefono(cursor.getString(5));
                 setDireccion(cursor.getString(6));
+                setImagen(cursor.getString(7));
+                setIdUsuario(cursor.getInt(8));
                 sqldb.close();
                 db.close();
                 return true;
@@ -121,7 +126,7 @@ public class Usuarios {
             db = new AdminSQLite(context);
             Cursor cursor;
             bdsql = db.getReadableDatabase();
-            cursor = bdsql.rawQuery("update usuarios set nombres = '"+getNombres()+"',apellidos = '"+getApellidos()+
+            cursor = bdsql.rawQuery("update usuarios set imagen = '"+getImagen()+"', nombres = '"+getNombres()+"',apellidos = '"+getApellidos()+
                     "',nombreUsuario = '"+getNombreUsuario()+"',telefono = '"+getTelefono()+"',direccion = '"+getDireccion()
                     +"' where correo = '"+correo+"';", null);
             if (cursor.moveToFirst()) {
@@ -144,6 +149,10 @@ public class Usuarios {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+    public String getImagen(){return this.imagen;}
+
+    public void setImagen(String imagen){this.imagen = imagen;}
 
     public String getNombres() {
         return nombres;

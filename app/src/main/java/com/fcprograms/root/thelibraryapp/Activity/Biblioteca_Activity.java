@@ -10,7 +10,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.fcprograms.root.thelibraryapp.Model.Bibliotecas;
+import com.fcprograms.root.thelibraryapp.Model.Usuarios;
 import com.fcprograms.root.thelibraryapp.R;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class Biblioteca_Activity extends AppCompatActivity {
     private EditText nombre;
@@ -18,6 +22,7 @@ public class Biblioteca_Activity extends AppCompatActivity {
     private EditText direccion;
     private EditText correo;
     private Bibliotecas bibliotecas;
+    private Usuarios usuarios;
     private Toolbar toolbar;
 
     @Override
@@ -37,32 +42,63 @@ public class Biblioteca_Activity extends AppCompatActivity {
         direccion = (EditText)findViewById(R.id.DireccionBibliotecaeditText);
         telefono = (EditText)findViewById(R.id.TelefonoBibliotecaeditText);
         correo = (EditText)findViewById(R.id.CorreoBibliotecaeditText);
+        usuarios = new Usuarios();
     }
 
-
-    public void guardarBiblioteca(){
+    private void llenarDatos(){
+        if (usuarios.buscar(this,mostrarArchivo())){
+            bibliotecas.setIdUsuario(usuarios.getIdUsuario());
+        }
         bibliotecas.setNombre(nombre.getText().toString());
         bibliotecas.setTelefono(telefono.getText().toString());
-        bibliotecas.setIdUsuario(1);
         bibliotecas.setCorreo(correo.getText().toString());
         bibliotecas.setDireccion(direccion.getText().toString());
+    }
 
+    public void guardarBiblioteca(){
+        llenarDatos();
         if (bibliotecas.save(this)) {
             Toast.makeText(this, "Guardo Correctamente" , Toast.LENGTH_SHORT).show();
         }else{
-           Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show();
+           Toast.makeText(this, "Error al Guardar", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void actualizarBiblioteca(){
+        llenarDatos();
+        if (bibliotecas.editar(this,usuarios.getIdUsuario()+"")){
+            Toast.makeText(this, "Actualizado Correctamente" , Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Error al Actualizar", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void buscarBiblioteca(){
-        if (bibliotecas.buscar(this,"1")){
-            nombre.setText(bibliotecas.getNombre());
-            telefono.setText(bibliotecas.getTelefono());
-            correo.setText(bibliotecas.getCorreo());
-            direccion.setText(bibliotecas.getDireccion());
-        }else{
-            Toast.makeText(this, "Registre una", Toast.LENGTH_SHORT).show();
+        if (usuarios.buscar(this,mostrarArchivo())) {
+            if (bibliotecas.buscar(this,usuarios.getIdUsuario()+"" )) {
+                nombre.setText(bibliotecas.getNombre());
+                telefono.setText(bibliotecas.getTelefono());
+                correo.setText(bibliotecas.getCorreo());
+                direccion.setText(bibliotecas.getDireccion());
+            } else {
+                Toast.makeText(this, "Registre una", Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    public String mostrarArchivo(){
+        String texto = null;
+        try {
+            InputStreamReader archivo = new InputStreamReader( openFileInput("the-library-App-data-user.txt"));
+            BufferedReader br = new BufferedReader(archivo);
+
+            texto = br.readLine();
+            br.close();
+            return texto;
+        }catch (Exception e){
+            //return texto +" catch = "+e.getMessage();
+        }
+        return texto;
     }
 
     @Override
@@ -76,9 +112,17 @@ public class Biblioteca_Activity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_save) {
-            guardarBiblioteca();
-            startActivity(new Intent(Biblioteca_Activity.this, MainActivity.class));
-            finish();
+            if (usuarios.buscar(this,mostrarArchivo())) {
+                if (bibliotecas.buscar(this,usuarios.getIdUsuario()+"")) {
+                    actualizarBiblioteca();
+                    startActivity(new Intent(Biblioteca_Activity.this, MainActivity.class));
+                    finish();
+                } else {
+                    guardarBiblioteca();
+                    startActivity(new Intent(Biblioteca_Activity.this, MainActivity.class));
+                    finish();
+                }
+            }
             return true;
         }
 

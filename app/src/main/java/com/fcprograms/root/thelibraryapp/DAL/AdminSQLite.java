@@ -20,6 +20,7 @@ public class AdminSQLite extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE usuarios(" +
                 "idUsuario       INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "imagen          TEXT(240),"+
                 "nombres         TEXT(40) NOT NULL," +
                 "apellidos       TEXT(40) NOT NULL," +
                 "nombreUsuario   TEXT(40)," +
@@ -81,6 +82,7 @@ public class AdminSQLite extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE usuarios(" +
                 "idUsuario       INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "imagen          TEXT(240)," +
                 "nombres         TEXT(40) NOT NULL," +
                 "apellidos       TEXT(40) NOT NULL," +
                 "nombreUsuario   TEXT(40)," +

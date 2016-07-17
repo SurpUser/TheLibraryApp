@@ -1,13 +1,19 @@
 package com.fcprograms.root.thelibraryapp.Activity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -19,9 +25,9 @@ import android.widget.Toast;
 
 import com.fcprograms.root.thelibraryapp.Model.Usuarios;
 import com.fcprograms.root.thelibraryapp.R;
-import com.fcprograms.root.thelibraryapp.Tools.Tools;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 
 public class PerfilUsuarioActivity extends AppCompatActivity {
@@ -33,8 +39,13 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
     private EditText direccion;
     private EditText telefono;
     private Usuarios usuarios;
-    private Tools tools;
-
+    private String APP_DIRECTORY = "myPictureApp/";
+    private String MEDIA_DIRECTORY = APP_DIRECTORY + "media";
+    private String TEMPORAL_PICTURE_NAME = "temporal.jpg";
+    private final int PHOTO_CODE = 100;
+    private final int SELECT_PICTURE = 200;
+    private ImageView imageView;
+    private String rutaImagen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,26 +55,85 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                final CharSequence[] options = {"Tomar Foto", "Cancelar"};
+                final AlertDialog.Builder builder = new AlertDialog.Builder(PerfilUsuarioActivity.this);
+                builder.setTitle("Elige una Opcion");
+                builder.setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int seleccion) {
+                        if(options[seleccion] == "Tomar Foto"){
+                            openCamera();
+                        /*}else if (options[seleccion] == "Elegir de Galeria") {
+                            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                            intent.setType("image/*");
+                            startActivityForResult(intent.createChooser(intent, "Selecciona app de imagen"), SELECT_PICTURE);*/
+                        }else if(options[seleccion] == "Cancelar"){
+                            dialog.dismiss();
+                        }
+                    }
+                });
+                builder.show();
             }
         });
 
         init();
-        cargarImagen();
+        cargarImagen(imageView);
         obtenerDatos();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    private void cargarImagen(){
+    private void openCamera() {
+        File file = new File(Environment.getExternalStorageDirectory(), MEDIA_DIRECTORY);
+        file.mkdirs();
+
+        String path = Environment.getExternalStorageDirectory() + File.separator
+                + MEDIA_DIRECTORY + File.separator + TEMPORAL_PICTURE_NAME;
+
+        File newFile = new File(path);
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(newFile));
+        startActivityForResult(intent, PHOTO_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode){
+            case PHOTO_CODE:
+                if(resultCode == RESULT_OK){
+                    String dir =  Environment.getExternalStorageDirectory() + File.separator
+                            + MEDIA_DIRECTORY + File.separator + TEMPORAL_PICTURE_NAME;
+                    decodeBitmap(dir);
+                }
+                break;
+
+            case SELECT_PICTURE:
+                if(resultCode == RESULT_OK){
+                    Uri path = data.getData();
+                    imageView.setImageURI(path);
+                }
+                break;
+        }
+
+    }
+
+    private void decodeBitmap(String dir) {
+        Bitmap bitmap;
+        bitmap = BitmapFactory.decodeFile(dir);
+        rutaImagen = dir;
+        imageView.setImageBitmap(bitmap);
+    }
+    
+    private void cargarImagen(ImageView imageView){
         Drawable originalDrawable = getResources().getDrawable(R.drawable.avatar_x);
         Bitmap originalBitmap = ((BitmapDrawable) originalDrawable).getBitmap();
 
         RoundedBitmapDrawable roundedDrawable = RoundedBitmapDrawableFactory.create(getResources(), originalBitmap);
 
         roundedDrawable.setCornerRadius(originalBitmap.getHeight());
-        ImageView imageView = (ImageView) findViewById(R.id.ImagenPerfil);
         imageView.setImageDrawable(roundedDrawable);
     }
 
@@ -76,7 +146,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
         nombreUsuario = (EditText)findViewById(R.id.NombreUsuarioPerfilEditText);
         direccion = (EditText)findViewById(R.id.DireccionPerfilEditText);
         telefono = (EditText)findViewById(R.id.TelefonoPerfilEditText);
-        tools = new Tools();
+        imageView = (ImageView) findViewById(R.id.ImagenPerfil);
     }
 
     private void obtenerDatos(){
@@ -87,10 +157,20 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
             correo.setText(usuarios.getCorreo());
             direccion.setText(usuarios.getDireccion());
             telefono.setText(usuarios.getTelefono());
+            try {
+                if (!usuarios.getImagen().isEmpty()) {
+                    Bitmap bitmap;
+                    bitmap = BitmapFactory.decodeFile(usuarios.getImagen());
+                    imageView.setImageBitmap(bitmap);
+                }
+            }catch (OutOfMemoryError e){
+                //Toast.makeText(PerfilUsuarioActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
     private void llenarDatos(){
+        usuarios.setImagen(rutaImagen);
         usuarios.setNombres(nombres.getText().toString());
         usuarios.setApellidos(apellidos.getText().toString());
         usuarios.setNombreUsuario(nombreUsuario.getText().toString());

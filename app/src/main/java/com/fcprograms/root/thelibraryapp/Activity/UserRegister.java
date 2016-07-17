@@ -38,6 +38,7 @@ public class UserRegister extends AppCompatActivity {
         usuarios.setContrasena(contrasena.getText().toString());
         usuarios.setNombreUsuario("");
         usuarios.setTipoUsuario(1);
+        usuarios.setImagen("");
         if (usuarios.save(this)) {
             Toast.makeText(this, "Usuario Guardado", Toast.LENGTH_LONG).show();
             finish();

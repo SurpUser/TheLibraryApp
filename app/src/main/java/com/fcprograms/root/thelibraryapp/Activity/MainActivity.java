@@ -2,6 +2,8 @@ package com.fcprograms.root.thelibraryapp.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,7 +27,7 @@ import java.io.InputStreamReader;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private TextView nombreUsuario;
     private TextView email;
-    private ImageView imagen;
+    private ImageView imageView;
     private Usuarios usuarios;
     private NavigationView navigationView;
     private MenuItem item;
@@ -152,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView)findViewById(R.id.nav_view);
         nombreUsuario =  (TextView)navigationView.getHeaderView(0).findViewById(R.id.NombreUsuarioTextView);
         email = (TextView)navigationView.getHeaderView(0).findViewById(R.id.EmailTextView);
-        imagen = (ImageView)navigationView.getHeaderView(0).findViewById(R.id.UsuarioImageView);
+        imageView = (ImageView)navigationView.getHeaderView(0).findViewById(R.id.UsuarioImageView);
         usuarios = new Usuarios();
     }
 
@@ -166,11 +168,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if(usuarios.buscar(this,mostrarArchivo())){
                     nombreUsuario.setText(usuarios.getNombres());
                     email.setText(usuarios.getCorreo());
+                    if (!usuarios.getImagen().isEmpty()) {
+                        Bitmap bitmap;
+                        bitmap = BitmapFactory.decodeFile(usuarios.getImagen());
+                        imageView.setImageBitmap(bitmap);
+                    }
                 }else{
                     Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                 }
-        }catch (Exception e){
-            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }catch (OutOfMemoryError e){
+           // Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }
