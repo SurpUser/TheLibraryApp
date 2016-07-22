@@ -58,8 +58,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activity.MainActivity" />
         </activity>
-        <activity android:name=".Activity.AcercaDeActivity" android:label=""/>
-        <activity android:name=".Activity.AyudaActivity" android:label=""/>
         <activity android:name=".Activity.PrestamosActivity" android:label="">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
