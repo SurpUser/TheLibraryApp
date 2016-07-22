@@ -4,11 +4,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
-
-import com.fcprograms.root.thelibraryapp.R;
 
 import java.util.regex.Pattern;
 
@@ -33,18 +29,6 @@ public class Tools{
             if (archbusca.equals(archivos[f]))
                 return true;
         return false;
-    }
-
-    public static void setActionBarContent(AppCompatActivity appCompatActivity){
-        Toolbar mToolbar = (Toolbar) appCompatActivity.findViewById(R.id.toolbar);
-
-        try {
-            appCompatActivity.setSupportActionBar(mToolbar);
-            appCompatActivity.getSupportActionBar().setDisplayShowHomeEnabled(true);
-            appCompatActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            appCompatActivity.getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
-        }catch (Exception e){ e.printStackTrace(); }
-
     }
 
     public String getEmail(Context context){

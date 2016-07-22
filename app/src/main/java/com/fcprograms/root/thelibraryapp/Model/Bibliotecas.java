@@ -22,15 +22,6 @@ public class Bibliotecas {
     private SQLiteDatabase bdsql;
     private ContentValues values;
 
-
-    public Bibliotecas(int idUsuario, String nombre, String telefono, String direccion, String correo) {
-        this.idUsuario = idUsuario;
-        this.nombre = nombre;
-        this.telefono = telefono;
-        this.direccion = direccion;
-        this.correo = correo;
-    }
-
     public Bibliotecas(){
         setIdUsuario(0);
         setNombre("");
@@ -51,9 +42,7 @@ public class Bibliotecas {
 
     public void setIdUsuario(int idUsuario) {this.idUsuario = idUsuario;}
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() { return nombre; }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -103,25 +92,6 @@ public class Bibliotecas {
             bdsql = db.getReadableDatabase();
             cursor = bdsql.rawQuery("update bibliotecas set nombre = '"+getNombre()+"',direccion = '"+getDireccion()+"',"+
                     "telefono = '"+getTelefono()+"',correo = '"+getCorreo()+"' where idUsuario = '"+id+"';", null);
-            if (cursor.moveToFirst()) {
-                return false;
-            } else{
-                return true;
-            }
-        }catch (SQLiteException e){
-            return false;
-        }finally {
-            bdsql.close();
-            db.close();
-        }
-    }
-
-    public Boolean eliminar(Context context, int id){
-        try {
-            db = new AdminSQLite(context);
-            Cursor cursor;
-            bdsql = db.getReadableDatabase();
-            cursor = bdsql.rawQuery("delete from bibliotecas where idBiblioteca = '"+id+"';", null);
             if (cursor.moveToFirst()) {
                 return false;
             } else{

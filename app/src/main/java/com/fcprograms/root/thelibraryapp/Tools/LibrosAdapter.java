@@ -61,7 +61,6 @@ public class LibrosAdapter extends BaseAdapter {
         if (rowView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
             rowView = inflater.inflate(R.layout.row, null);
-            // configure view holder
             viewHolder = new ViewHolder();
             viewHolder.imagen = (ImageView)rowView.findViewById(R.id.imageView_Libro);
             viewHolder.txtTitulo = (TextView)rowView.findViewById(R.id.textView_superior);

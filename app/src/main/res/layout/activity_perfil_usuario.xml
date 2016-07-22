@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,7 +18,6 @@
             android:id="@+id/ctlLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="?attr/colorPrimary" >
 
             <ImageView
@@ -44,56 +44,132 @@
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
+
     </android.support.design.widget.AppBarLayout>
 
-    <EditText
+    <LinearLayout
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="230dp"
-        android:id="@+id/NombrePerfilEditText"
-        android:hint="@string/nombreText"
-        android:inputType="textCapWords" />
+        xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="270dp"
-        android:id="@+id/ApellidoPerfilEditText"
-        android:hint="@string/apellidoText"
-        android:inputType="textCapWords" />
+        <android.support.v7.widget.CardView
+            android:layout_height="375dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="match_parent"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:background="#FFF"
+            tools:context=".Activity.UserRegister"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_gravity="bottom">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="310dp"
-        android:id="@+id/EmailPerfilEditText"
-        android:hint="@string/correoText"
-        android:enabled="false"
-        android:inputType="textEmailAddress" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
-        android:id="@+id/NombreUsuarioPerfilEditText"
-        android:hint="@string/nombreUsuarioText"
-        android:inputType="textCapWords" />
+                <EditText
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/NombrePerfilEditText"
+                    android:hint="@string/nombreText"
+                    android:inputType="textCapWords" />
+            </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="390dp"
-        android:id="@+id/DireccionPerfilEditText"
-        android:hint="@string/direcionText"
-        android:inputType="textCapWords|text" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="430dp"
-        android:id="@+id/TelefonoPerfilEditText"
-        android:hint="@string/telefonoText"
-        android:inputType="phone" />
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="80dp"
+                    android:id="@+id/ApellidoPerfilEditText"
+                    android:hint="@string/apellidoText"
+                    android:inputType="textCapWords" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="130dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/DireccionPerfilEditText"
+                    android:hint="@string/direcionText"
+                    android:inputType="textCapWords|text" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="190dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/TelefonoPerfilEditText"
+                    android:hint="@string/telefonoText"
+                    android:inputType="phone" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="250dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="420dp"
+                    android:id="@+id/NombreUsuarioPerfilEditText"
+                    android:hint="@string/nombreUsuarioText"
+                    android:inputType="textCapWords" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="310dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="530dp"
+                    android:id="@+id/EmailPerfilEditText"
+                    android:hint="@string/correoText"
+                    android:enabled="false"
+                    android:inputType="textEmailAddress" />
+            </android.support.design.widget.TextInputLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/botonPerfilFab"
@@ -104,5 +180,7 @@
         app:borderWidth="0dp"
         app:layout_anchor="@id/appbarLayout"
         app:layout_anchorGravity="bottom|right|end" />
+
+
 
 </android.support.design.widget.CoordinatorLayout>

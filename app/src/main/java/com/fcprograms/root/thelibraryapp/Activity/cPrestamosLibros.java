@@ -65,7 +65,6 @@ public class cPrestamosLibros extends AppCompatActivity  implements AdapterView.
         String fechaInicio = fecha;
         String fechaActual;
         String subFecha;
-        String horaInicio;
         String subHora;
         String horaActual;
         Date date = new Date();
@@ -132,10 +131,7 @@ public class cPrestamosLibros extends AppCompatActivity  implements AdapterView.
                 b = 30;
             }
         }
-       /* if ((anioInicio > anioActual) || (anioInicio == anioActual && mesInicio > mesActual)
-                || (anioInicio == anioActual && mesInicio == mesActual && diaInicio > diaActual)) {
-                  Toast.makeText(cPrestamosLibros.this, "La fecha inicio debe ser anterior a la fecha actual", Toast.LENGTH_SHORT).show();
-        } else {*/
+
             if (mesInicio <= mesActual) {
                 anios = anioActual - anioInicio;
                 if (diaInicio <= diaActual) {
@@ -160,7 +156,6 @@ public class cPrestamosLibros extends AppCompatActivity  implements AdapterView.
                     dias = diaActual - diaInicio;
                 }
             }
-        //}
         dias -=30;
         createSimpleDialog(dias+"/"+meses+"/"+anios+ " "+horas+":"+minutos,idPrestamo).show();
 }
@@ -212,7 +207,7 @@ public class cPrestamosLibros extends AppCompatActivity  implements AdapterView.
 
         if(v.getId() == R.id.PrestamoslistView) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-            menu.setHeaderTitle("Elija una opción");//lista.getAdapter().getItem(info.position).toString()
+            menu.setHeaderTitle("Elija una opción");
             inflater.inflate(R.menu.menu_prestamos_devoluciones, menu);
         }
     }

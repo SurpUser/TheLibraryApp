@@ -25,16 +25,6 @@ public class Libros {
     private SQLiteDatabase bdsql;
     private ContentValues values;
 
-    public Libros(String titulo, String edicion,String anoEdicion, String iSBN, String area, String editora,String autor) {
-        this.titulo = titulo;
-        this.edicion = edicion;
-        this.anoEdicion = anoEdicion;
-        this.iSBN = iSBN;
-        this.area = area;
-        this.editora = editora;
-        this.autor = autor;
-    }
-
     public Libros(int idLibro,int idImagen,String Titulo, String autor){
         setIdImagen(idImagen);
         setTitulo(Titulo);

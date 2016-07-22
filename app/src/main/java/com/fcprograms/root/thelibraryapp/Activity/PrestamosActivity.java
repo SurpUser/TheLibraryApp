@@ -76,7 +76,6 @@ public class PrestamosActivity extends AppCompatActivity {
     private void updateDateInicio() {
         fechaInicio.setText(
                 new StringBuilder()
-                        // Month is 0 based so add 1
                         .append(dia).append("/")
                         .append(mes + 1).append("/")
                         .append(ano).append(" "));
@@ -84,8 +83,6 @@ public class PrestamosActivity extends AppCompatActivity {
 
     }
 
-
-    //-------------------------------------------update time---//
     public void updatetimeInicio() {
         fechaInicio.setText(
                 new StringBuilder()
@@ -99,7 +96,6 @@ public class PrestamosActivity extends AppCompatActivity {
     private void updateDateFin() {
         fechaFin.setText(
                 new StringBuilder()
-                        // Month is 0 based so add 1
                         .append(dia).append("/")
                         .append(mes + 1).append("/")
                         .append(ano).append(" "));
@@ -107,8 +103,6 @@ public class PrestamosActivity extends AppCompatActivity {
 
     }
 
-
-    //-------------------------------------------update time---//
     public void updatetimeFin() {
         fechaFin.setText(
                 new StringBuilder()

@@ -95,9 +95,7 @@ public class Biblioteca_Activity extends AppCompatActivity {
             texto = br.readLine();
             br.close();
             return texto;
-        }catch (Exception e){
-            //return texto +" catch = "+e.getMessage();
-        }
+        }catch (Exception e){ }
         return texto;
     }
 

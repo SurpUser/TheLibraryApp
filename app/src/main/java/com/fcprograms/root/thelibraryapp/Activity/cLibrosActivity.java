@@ -64,9 +64,7 @@ public class cLibrosActivity extends AppCompatActivity  implements AdapterView.O
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-       //Toast.makeText(cLibrosActivity.this, "The Position is: "+position +" and Id: " + ((Libros)arrayLibros.get(position)).getIdLibro(), Toast.LENGTH_SHORT).show();
-    }
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) { }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -75,7 +73,7 @@ public class cLibrosActivity extends AppCompatActivity  implements AdapterView.O
 
         if(v.getId() == R.id.LibroslistView) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-            menu.setHeaderTitle("Elija una opción");//lista.getAdapter().getItem(info.position).toString()
+            menu.setHeaderTitle("Elija una opción");
             inflater.inflate(R.menu.menu_ctx_lista, menu);
         }
     }
@@ -141,7 +139,6 @@ public class cLibrosActivity extends AppCompatActivity  implements AdapterView.O
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        //*** setOnQueryTextFocusChangeListener ***
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
@@ -169,14 +166,12 @@ public class cLibrosActivity extends AppCompatActivity  implements AdapterView.O
         MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                // Do something when collapsed
-                return true;  // Return true to collapse action view
+                return true;
             }
 
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
-                // Do something when expanded
-                return true;  // Return true to expand action view
+                return true;
             }
         });
         return true;
@@ -184,12 +179,7 @@ public class cLibrosActivity extends AppCompatActivity  implements AdapterView.O
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
 
             return true;

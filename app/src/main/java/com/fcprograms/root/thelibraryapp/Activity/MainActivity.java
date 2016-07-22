@@ -41,15 +41,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         init();
 
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -84,8 +75,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.action_settings) {
             startActivity(new Intent(MainActivity.this,Biblioteca_Activity.class));
-           // finish();
-            //setTheme(R.style.AppThemeRedLight);
         }
 
         return super.onOptionsItemSelected(item);
@@ -158,11 +147,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         usuarios = new Usuarios();
     }
 
-    private void controlUsuario(){
-        item = (MenuItem)navigationView.getMenu().findItem(R.id.nav_share);
-        item.setVisible(false);
-    }
-
     public void initDataUser(){
         try {
                 if(usuarios.buscar(this,mostrarArchivo())){
@@ -176,9 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }else{
                     Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
                 }
-        }catch (OutOfMemoryError e){
-           // Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+        }catch (OutOfMemoryError e){ }
 
     }
 

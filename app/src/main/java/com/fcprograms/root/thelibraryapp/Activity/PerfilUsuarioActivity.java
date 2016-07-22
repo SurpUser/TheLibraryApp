@@ -46,6 +46,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
     private final int SELECT_PICTURE = 200;
     private ImageView imageView;
     private String rutaImagen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,10 +64,6 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int seleccion) {
                         if(options[seleccion] == "Tomar Foto"){
                             openCamera();
-                        /*}else if (options[seleccion] == "Elegir de Galeria") {
-                            Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                            intent.setType("image/*");
-                            startActivityForResult(intent.createChooser(intent, "Selecciona app de imagen"), SELECT_PICTURE);*/
                         }else if(options[seleccion] == "Cancelar"){
                             dialog.dismiss();
                         }
@@ -163,9 +160,7 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
                     bitmap = BitmapFactory.decodeFile(usuarios.getImagen());
                     imageView.setImageBitmap(bitmap);
                 }
-            }catch (OutOfMemoryError e){
-                //Toast.makeText(PerfilUsuarioActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+            }catch (OutOfMemoryError e){  }
         }
     }
 
@@ -214,10 +209,8 @@ public class PerfilUsuarioActivity extends AppCompatActivity {
             texto = br.readLine();
             br.close();
             return texto;
-        }catch (Exception e){
-            //return texto +" catch = "+e.getMessage();
-        }
-        return texto +" fuera del try ";// "francisjcv@hotmail.com";
+        }catch (Exception e){ }
+        return texto;
     }
 
 }

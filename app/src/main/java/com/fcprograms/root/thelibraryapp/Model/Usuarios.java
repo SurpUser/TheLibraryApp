@@ -27,30 +27,17 @@ public class Usuarios {
     private ContentValues values;
 
     public Usuarios() {
-        this.idUsuario = 0;
-        this.nombres = "";
-        this.apellidos="";
-        this.nombreUsuario="";
-        this.contrasena="";
-        this.correo="";
-        this.tipoUsuario=0;
-        this.telefono="";
-        this.direccion="";
-        this.imagen="";
+        setIdUsuario(0);
+        setNombres("");
+        setApellidos("");
+        setNombreUsuario("");
+        setContrasena("");
+        setCorreo("");
+        setTipoUsuario(0);
+        setTelefono("");
+        setDireccion("");
+        setImagen("");
     }
-
-    public Usuarios(int idUsuario, String nombres, String apellidos, String nombreUsuario, String contrasena, String correo, int tipoUsuario, String telefono, String direccion) {
-        this.setIdUsuario(idUsuario);
-        this.setNombres(nombres);
-        this.setApellidos(apellidos);
-        this.setNombreUsuario(nombreUsuario);
-        this.setContrasena(contrasena);
-        this.setCorreo(correo);
-        this.setTipoUsuario(tipoUsuario);
-        this.setTelefono(telefono);
-        this.setDireccion(direccion);
-    }
-
 
     public Boolean save(Context context){
         try {
